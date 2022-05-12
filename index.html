@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 0301</title>
+    <style>
+        .text-background {
+            background: #66b3ba;
+            font-size: 20px;
+        }
+
+
+
+        table {
+            font-weight: bold;
+            text-align: left;
+        }
+
+        td {
+            width: 4em;
+            height: 2em;
+            float: left;
+            padding-left: 10px;
+            padding-top: 10px;
+        }
+
+        th {
+            width: 5em;
+            height: 2em;
+            float: left;
+            background: brown;
+            color: white;
+            padding-left: 10px;
+            padding-top: 10px;
+        }
+
+        tr {
+            margin: 0 0 0 0;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <script>
+        const w = 10;
+        const h = 10;
+        const par = '#b5bde1';
+        const ne_par = 'rgba(181,189,225,0.6)';
+
+        document.write('<div class="text-background" style="float: left; display: inline-block; padding-right: 3px; ">Це  </div>')
+        document.write(`<div class="text-background" style="font-weight: bold; text-decoration: underline; width: 165px">пробний текст.</div>`);
+
+        document.write('<table>');
+
+        for (let i = 0; i < h; i++) {
+            let color;
+            if (i & 1) {
+                color = par;
+            } else {
+                color = ne_par;
+            }
+
+            document.write(`<tr style="background-color:${color};">`);
+            for (let j = 0; j < w; j++) {
+                let tag;
+
+                if (!i) {
+                    tag = 'th';
+                } else {
+                    tag = 'td';
+                }
+
+                if (!(i && j)) {
+                    document.write(`<${tag}>${i + 1}</${tag}>`);
+                }
+            }
+            document.write(`</tr></div>`);
+        }
+        document.write('</table>');
+    </script>
+</div>
+<script>
+    function day_count() {
+        const d1 = new Date(document.getElementById('first-date').value);
+        const d2 = new Date(document.getElementById('second-date').value);
+        document.getElementById('dateResult').innerHTML = Math.ceil((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+    }
+</script>
+<div>
+    <h2>Калькулятор дати</h2>
+    <input id="first-date" type="date">
+    <input id="second-date" type="date">
+    <input type="button" value="Порахувати" onclick="day_count()">
+    <p id="dateResult"></p>
+</div>
+<script>
+    function gaus_algorithm() {
+        const year = document.getElementById('year').value;
+        const a = year % 19;
+        const b = year % 4;
+        const c = year % 7;
+        const d = (19 * a + 15) % 30;
+        const e = (2 * b + 4 * c + 6 * d + 6) % 7;
+        const f = d + e;
+
+        const result = document.getElementById('gausResult');
+
+        result.innerHTML = `Великдень буде ${f <= 9 ? 22 + f : f - 9}`;
+
+    }
+</script>
+
+<h3>Визначення Великодня</h3>
+<input id="year" type="text">
+<input type="button" value="Порахувати" onclick="gaus_algorithm()">
+<p id="gausResult"></p>
+</body>
+</html>
